@@ -40,12 +40,12 @@ export default function ProgressRing({
           initial={{ strokeDashoffset: circumference }}
           animate={{ strokeDashoffset }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="text-blue-600"
+          className="text-rp-blue-primary-dark"
           strokeLinecap="round"
         />
       </svg>
       <div className="absolute flex flex-col items-center justify-center text-center">
-        <span className="text-xs font-bold text-slate-700">{Math.round(percentage)}%</span>
+        <span className="text-xs font-bold text-rp-text">{Math.round(percentage)}%</span>
       </div>
     </div>
   );

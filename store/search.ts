@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LocalTrain } from "@/lib/trains-db";
+import { LocalTrain } from "@/types/train";
 
 export interface RecentTrain extends LocalTrain {}
 

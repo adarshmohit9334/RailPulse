@@ -15,14 +15,14 @@ export default function EnvironmentWidget({ journey }: EnvironmentWidgetProps) {
   const getWeatherIcon = (condition: string) => {
     switch (condition) {
       case "Rainy":
-        return <CloudRain className="text-blue-500" />;
+        return <CloudRain className="text-rp-blue-primary" />;
       case "Sunny":
       case "Clear":
-        return <Sun className="text-yellow-500" />;
+        return <Sun className="text-rp-warning" />;
       case "Mist":
       case "Cloudy":
       default:
-        return <CloudFog className="text-slate-400" />;
+        return <CloudFog className="text-rp-text-muted" />;
     }
   };
 
@@ -30,27 +30,27 @@ export default function EnvironmentWidget({ journey }: EnvironmentWidgetProps) {
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
       {/* Weather Card */}
       {weather && (
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center justify-between">
+        <div className="bg-rp-surface rounded-[var(--radius-rp-card)] p-5 shadow-[var(--shadow-rp-soft)] border border-rp-border-soft flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="p-3 bg-blue-50 rounded-xl">
+            <div className="p-3 bg-rp-surface-soft rounded-[var(--radius-rp-card)]">
               {getWeatherIcon(weather.condition)}
             </div>
             <div>
-              <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Weather</p>
+              <p className="text-sm font-semibold text-rp-text-secondary uppercase tracking-wider">Weather</p>
               <div className="flex items-end space-x-2">
-                <span className="text-2xl font-bold text-slate-900">{weather.tempC}°C</span>
-                <span className="text-sm font-medium text-slate-600 mb-1">{weather.condition}</span>
+                <span className="text-2xl font-bold text-rp-text">{weather.tempC}°C</span>
+                <span className="text-sm font-medium text-rp-text-secondary mb-1">{weather.condition}</span>
               </div>
             </div>
           </div>
           
-          <div className="flex flex-col space-y-2 text-xs text-slate-500 font-medium border-l border-slate-100 pl-4">
+          <div className="flex flex-col space-y-2 text-xs text-rp-text-secondary font-medium border-l border-rp-border-soft pl-4">
             <div className="flex items-center space-x-1.5">
-              <Droplets size={14} className="text-blue-400" />
+              <Droplets size={14} className="text-rp-blue-primary-muted" />
               <span>{weather.humidity}% Humidity</span>
             </div>
             <div className="flex items-center space-x-1.5">
-              <Wind size={14} className="text-slate-400" />
+              <Wind size={14} className="text-rp-text-muted" />
               <span>{weather.windSpeedKmh} km/h Wind</span>
             </div>
           </div>
@@ -59,23 +59,23 @@ export default function EnvironmentWidget({ journey }: EnvironmentWidgetProps) {
 
       {/* Terrain Card */}
       {terrain && (
-        <div className="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex items-center justify-between">
+        <div className="bg-rp-surface rounded-[var(--radius-rp-card)] p-5 shadow-[var(--shadow-rp-soft)] border border-rp-border-soft flex items-center justify-between">
           <div className="flex items-center space-x-4">
-            <div className="p-3 bg-emerald-50 rounded-xl">
-              <Mountain className="text-emerald-500" />
+            <div className="p-3 bg-rp-surface-soft rounded-[var(--radius-rp-card)]">
+              <Mountain className="text-rp-blue-primary-muted" />
             </div>
             <div>
-              <p className="text-sm font-semibold text-slate-500 uppercase tracking-wider">Terrain</p>
+              <p className="text-sm font-semibold text-rp-text-secondary uppercase tracking-wider">Terrain</p>
               <div className="flex items-end space-x-2">
-                <span className="text-2xl font-bold text-slate-900">{terrain.elevationM}m</span>
-                <span className="text-sm font-medium text-slate-600 mb-1">Elevation</span>
+                <span className="text-2xl font-bold text-rp-text">{terrain.elevationM}m</span>
+                <span className="text-sm font-medium text-rp-text-secondary mb-1">Elevation</span>
               </div>
             </div>
           </div>
           
-          <div className="flex flex-col space-y-2 text-xs text-slate-500 font-medium border-l border-slate-100 pl-4 justify-center">
+          <div className="flex flex-col space-y-2 text-xs text-rp-text-secondary font-medium border-l border-rp-border-soft pl-4 justify-center">
             <div className="flex items-center space-x-1.5">
-              <MapIcon size={14} className="text-emerald-400" />
+              <MapIcon size={14} className="text-rp-blue-primary-muted" />
               <span className="text-sm">{terrain.type}</span>
             </div>
           </div>

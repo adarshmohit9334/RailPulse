@@ -53,14 +53,14 @@ export default function TrainHeader({ journey }: TrainHeaderProps) {
   };
 
   return (
-    <div className="flex items-center justify-between bg-white p-4 rounded-2xl shadow-sm border border-slate-100 mb-4">
+    <div className="flex items-center justify-between bg-rp-surface p-4 rounded-[var(--radius-rp-card)] shadow-[var(--shadow-rp-soft)] border border-rp-border-soft mb-4">
       <div>
-        <h1 className="text-xl font-bold text-slate-900 flex items-center space-x-2">
+        <h1 className="text-xl font-bold text-rp-text-very-dark flex items-center space-x-2">
           <span>{journey.number}</span>
-          <span className="text-slate-300">•</span>
+          <span className="text-rp-border">•</span>
           <span>{journey.name}</span>
         </h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-sm text-rp-text-secondary mt-1">
           {journey.origin} to {journey.destination}
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function TrainHeader({ journey }: TrainHeaderProps) {
       <div className="flex items-center space-x-2">
         <button
           onClick={handleShare}
-          className="p-2 text-slate-400 hover:text-blue-500 hover:bg-blue-50 rounded-full transition-colors"
+          className="p-2 text-rp-text-muted hover:text-rp-blue-primary hover:bg-rp-surface-soft rounded-full transition-colors"
           aria-label="Share journey"
         >
           <Share2 size={20} />
@@ -77,8 +77,8 @@ export default function TrainHeader({ journey }: TrainHeaderProps) {
           onClick={toggleFavorite}
           className={`p-2 rounded-full transition-colors ${
             isFav 
-              ? "text-yellow-500 bg-yellow-50 hover:bg-yellow-100" 
-              : "text-slate-400 hover:text-yellow-500 hover:bg-yellow-50"
+              ? "text-rp-warning bg-yellow-50 hover:bg-yellow-100" 
+              : "text-rp-text-muted hover:text-rp-warning hover:bg-yellow-50"
           }`}
           aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
         >

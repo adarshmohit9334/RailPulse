@@ -31,12 +31,12 @@ export default function TrainClient({ id }: { id: string }) {
   }, [journey, setActiveJourney]);
 
   if (isLoading) {
-    return <div className="p-8 text-center text-slate-500">Loading live journey data...</div>;
+    return <div className="p-8 text-center text-rp-text-secondary">Loading live journey data...</div>;
   }
 
   if (error || !journey) {
     return (
-      <div className="p-8 text-center text-red-500 bg-red-50 rounded-2xl">
+      <div className="p-8 text-center text-rp-danger bg-rp-danger-bg rounded-[var(--radius-rp-card)]">
         Failed to load train details. Please check the train number and try again.
       </div>
     );

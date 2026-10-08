@@ -1,5 +1,46 @@
 @import "tailwindcss";
 
+@theme {
+  --color-rp-bg-primary: #E6F0F8;
+  --color-rp-bg-secondary: #D9E9F4;
+  --color-rp-surface: #FFFFFF;
+  --color-rp-surface-soft: #F0F6FA;
+  
+  --color-rp-blue-primary: #1E9CD7;
+  --color-rp-blue-muted: #66BBE2;
+  --color-rp-blue-dark: #193153;
+  
+  --color-rp-text-very-dark: #193153;
+  --color-rp-text-secondary: #5C7A99;
+  --color-rp-text-muted: #95AAC1;
+  
+  --color-rp-border: #DDE8F1;
+  --color-rp-border-soft: #E9F1F7;
+
+  --color-rp-success: #2EAB76;
+  --color-rp-success-bg: #EAF6F0;
+  
+  --color-rp-warning: #DE9536;
+  --color-rp-warning-bg: #FDF4E7;
+  
+  --color-rp-danger: #D65A5A;
+  --color-rp-danger-bg: #F9EBEB;
+
+  --shadow-rp-soft: 0 4px 20px rgba(25, 49, 83, 0.05);
+  --shadow-rp-small: 0 2px 8px rgba(25, 49, 83, 0.04);
+  
+  --radius-rp-card: 16px;
+  --radius-rp-input: 14px;
+  --radius-rp-button: 12px;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-rp-bg-primary);
+    color: var(--color-rp-text-secondary);
+  }
+}
+
 @layer utilities {
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);

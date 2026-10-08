@@ -114,16 +114,16 @@ export default function MapView({ journey }: MapViewProps) {
         const el = document.createElement("div");
         const isCurrent = station.code === journey.currentStation?.code;
         
-        el.className = `w-4 h-4 rounded-full border-2 bg-white shadow-sm ${
-          station.passed ? "border-green-500" : isCurrent ? "border-blue-600 scale-125 ring-2 ring-blue-200" : "border-slate-400"
+        el.className = `w-4 h-4 rounded-full border-2 bg-rp-surface shadow-[var(--shadow-rp-soft)] ${
+          station.passed ? "border-rp-success" : isCurrent ? "border-rp-blue-primary scale-125 ring-2 ring-[var(--color-rp-border-soft)]" : "border-rp-text-muted"
         }`;
         
         new maplibregl.Marker({ element: el })
           .setLngLat([station.lng, station.lat])
           .setPopup(
             new maplibregl.Popup({ offset: 15 }).setHTML(
-              `<div class="p-1"><p class="font-bold text-sm text-slate-800">${station.name} (${station.code})</p>
-              <p class="text-xs text-slate-500">${station.passed ? "Passed" : isCurrent ? "Current" : "Upcoming"}</p></div>`
+              `<div class="p-1"><p class="font-bold text-sm text-rp-text">${station.name} (${station.code})</p>
+              <p class="text-xs text-rp-text-secondary">${station.passed ? "Passed" : isCurrent ? "Current" : "Upcoming"}</p></div>`
             )
           )
           .addTo(currentMap);
@@ -135,7 +135,7 @@ export default function MapView({ journey }: MapViewProps) {
       const { lat, lng } = journey.currentLocation;
 
       const trainEl = document.createElement("div");
-      trainEl.className = "flex items-center justify-center w-10 h-10 bg-blue-600 text-white rounded-full shadow-lg border-2 border-white z-50 transition-transform";
+      trainEl.className = "flex items-center justify-center w-10 h-10 bg-rp-blue-primary text-white rounded-full shadow-[var(--shadow-rp-soft)] border-2 border-white z-50 transition-transform";
       trainEl.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-train-front"><path d="M8 3.1V7a4 4 0 0 0 8 0V3.1"/><path d="m9 15-1.5 6"/><path d="m15 15 1.5 6"/><path d="M3 15h18"/><path d="M4 11v4"/><path d="M20 11v4"/><rect x="8" y="11" width="8" height="4" rx="1"/><rect x="5" y="3" width="14" height="12" rx="4"/></svg>`;
 
       if (trainMarkerRef.current) {
@@ -145,8 +145,8 @@ export default function MapView({ journey }: MapViewProps) {
           .setLngLat([lng, lat])
           .setPopup(
             new maplibregl.Popup({ offset: 20 }).setHTML(
-              `<div class="p-1"><p class="font-bold text-sm text-slate-800">${journey.number} - ${journey.status}</p>
-              <p class="text-xs text-slate-500">${journey.speedKmh} km/h • ${journey.delayMinutes}m delay</p></div>`
+              `<div class="p-1"><p class="font-bold text-sm text-rp-text">${journey.number} - ${journey.status}</p>
+              <p class="text-xs text-rp-text-secondary">${journey.speedKmh} km/h • ${journey.delayMinutes}m delay</p></div>`
             )
           )
           .addTo(currentMap);
@@ -155,16 +155,16 @@ export default function MapView({ journey }: MapViewProps) {
   }, [mapLoaded, journey]);
 
   return (
-    <div className="bg-white rounded-3xl p-2 shadow-sm border border-slate-100 h-[400px] md:h-[500px] relative overflow-hidden">
-      <div ref={mapContainer} className="w-full h-full rounded-2xl" />
+    <div className="bg-rp-surface rounded-[var(--radius-rp-card)] p-2 shadow-[var(--shadow-rp-soft)] border border-rp-border-soft h-[400px] md:h-[500px] relative overflow-hidden">
+      <div ref={mapContainer} className="w-full h-full rounded-[var(--radius-rp-card)]" />
       
       {/* Live Badge Overlay */}
-      <div className="absolute top-6 left-6 bg-white/90 backdrop-blur px-3 py-1.5 rounded-lg shadow-sm border border-slate-200 flex items-center space-x-2 z-10">
+      <div className="absolute top-6 left-6 bg-rp-surface/90 backdrop-blur px-3 py-1.5 rounded-rp-input shadow-[var(--shadow-rp-soft)] border border-rp-border flex items-center space-x-2 z-10">
         <span className="relative flex h-3 w-3">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          <span className="relative inline-flex rounded-full h-3 w-3 bg-rp-danger"></span>
         </span>
-        <span className="text-xs font-bold text-slate-700">LIVE TRACKING</span>
+        <span className="text-xs font-bold text-rp-text">LIVE TRACKING</span>
       </div>
     </div>
   );

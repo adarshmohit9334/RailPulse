@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { LocalTrain } from "@/lib/trains-db";
+import { LocalTrain } from "@/types/train";
 
 interface FavoritesState {
   favorites: LocalTrain[];

@@ -58,3 +58,20 @@ export interface LiveJourney {
     cleanlinessScore: number;
   };
 }
+
+export interface LocalTrain {
+  id: string;
+  name: string;
+  number: string;
+  origin?: string;
+  destination?: string;
+  from?: string;
+  fromCode?: string;
+  to?: string;
+  toCode?: string;
+  departureTime?: string;
+  arrivalTime?: string;
+  duration?: string;
+  type?: string;
+  days?: string[];
+}
