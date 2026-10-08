@@ -12,6 +12,15 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "RailPulse — Live Train Tracking",
   description: "Track Indian trains live with real-time location, delay updates, route analytics, weather and journey intelligence.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "RailPulse",
+  },
+};
+
+export const viewport = {
+  themeColor: "#3b82f6",
 };
 
 export default function RootLayout({

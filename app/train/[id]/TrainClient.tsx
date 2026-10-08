@@ -2,8 +2,12 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { LiveJourney } from "@/types/train";
+import TrainHeader from "@/components/journey/TrainHeader";
 import JourneyCard from "@/components/journey/JourneyCard";
 import Timeline from "@/components/journey/Timeline";
+import EnvironmentWidget from "@/components/journey/EnvironmentWidget";
+import AnalyticsDashboard from "@/components/journey/AnalyticsDashboard";
+import MapView from "@/features/maps/MapView";
 import { useJourneyStore } from "@/store/journey";
 import { useEffect } from "react";
 
@@ -39,13 +43,18 @@ export default function TrainClient({ id }: { id: string }) {
   }
 
   return (
-    <div className="max-w-3xl mx-auto space-y-6">
-      <JourneyCard journey={journey} />
-      <Timeline stations={journey.stations} currentStationCode={journey.currentStation?.code} />
-      
-      {/* Map Placeholder for Phase 3 */}
-      <div className="bg-slate-100 rounded-3xl p-6 text-center text-slate-500 border border-slate-200">
-        Map will be implemented in Phase 3
+    <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="lg:col-span-2 space-y-6">
+        <TrainHeader journey={journey} />
+        <JourneyCard journey={journey} />
+        <EnvironmentWidget journey={journey} />
+        <AnalyticsDashboard journey={journey} />
+        <MapView journey={journey} />
+      </div>
+      <div className="lg:col-span-1">
+        <div className="sticky top-6">
+          <Timeline stations={journey.stations} currentStationCode={journey.currentStation?.code} />
+        </div>
       </div>
     </div>
   );

@@ -41,4 +41,20 @@ export interface LiveJourney {
   nextStation?: Station;
   stations: Station[];
   routeGeometry?: number[][]; // [lng, lat][]
+  weather?: {
+    tempC: number;
+    condition: "Sunny" | "Cloudy" | "Rainy" | "Clear" | "Mist";
+    humidity: number;
+    windSpeedKmh: number;
+  };
+  terrain?: {
+    elevationM: number;
+    type: "Plains" | "Hilly" | "Mountains" | "Coastal" | "Urban";
+  };
+  analytics?: {
+    punctuality30Days: number; // percentage
+    averageDelayMinutes: number;
+    maxSpeedKmh: number;
+    cleanlinessScore: number;
+  };
 }
