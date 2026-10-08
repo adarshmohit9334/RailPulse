@@ -1,4 +1,5 @@
 import { cn } from "@/utils/cn";
+import { formatDelay } from "@/utils/time";
 
 export default function DelayBadge({ minutes }: { minutes: number }) {
   if (minutes <= 0) {
@@ -17,7 +18,7 @@ export default function DelayBadge({ minutes }: { minutes: number }) {
         isMinorDelay ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700"
       )}
     >
-      {minutes}m delay
+      {formatDelay(minutes)} delay
     </span>
   );
 }

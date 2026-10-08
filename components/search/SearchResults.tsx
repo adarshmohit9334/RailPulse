@@ -5,6 +5,7 @@ import { LocalTrain, popularTrains } from "@/lib/trains-db";
 import { Train, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useDebounce } from "@/hooks/useDebounce";
+import { useSearchStore } from "@/store/search";
 
 interface SearchResultsProps {
   query: string;
@@ -12,6 +13,8 @@ interface SearchResultsProps {
 
 export default function SearchResults({ query }: SearchResultsProps) {
   const debouncedQuery = useDebounce(query, 300);
+  const recentSearches = useSearchStore((state) => state.recentSearches);
+  const addRecentSearch = useSearchStore((state) => state.addRecentSearch);
 
   const { data: searchResults, isLoading } = useQuery({
     queryKey: ["search", debouncedQuery],
@@ -25,7 +28,10 @@ export default function SearchResults({ query }: SearchResultsProps) {
     enabled: debouncedQuery.length >= 2,
   });
 
-  const displayResults = debouncedQuery.length < 2 ? popularTrains.slice(0, 5) : searchResults || [];
+  const isSearchActive = debouncedQuery.length >= 2;
+  const displayResults = isSearchActive 
+    ? (searchResults || []) 
+    : (recentSearches.length > 0 ? recentSearches : popularTrains.slice(0, 5));
   
   // If user entered a 5 digit number and it's not in the db, offer to track it directly
   const is5Digit = /^\d{5}$/.test(debouncedQuery);
@@ -35,7 +41,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
     <div className="w-full bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
       <div className="px-4 py-3 bg-slate-50 border-b border-slate-100">
         <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-          {debouncedQuery.length < 2 ? "Popular Trains" : "Search Results"}
+          {isSearchActive ? "Search Results" : (recentSearches.length > 0 ? "Recent Searches" : "Popular Trains")}
         </h3>
       </div>
       
@@ -47,6 +53,14 @@ export default function SearchResults({ query }: SearchResultsProps) {
             {is5Digit && !exactMatch && (
               <Link
                 href={`/train/${debouncedQuery}`}
+                onClick={() => addRecentSearch({
+                  number: debouncedQuery,
+                  name: "Tracked Train",
+                  from: "",
+                  fromCode: "",
+                  to: "",
+                  toCode: ""
+                })}
                 className="flex items-center justify-between p-4 bg-blue-50/50 hover:bg-blue-50 transition-colors group"
               >
                 <div className="flex items-start space-x-4">
@@ -73,6 +87,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
                 <Link
                   key={train.number}
                   href={`/train/${train.number}`}
+                  onClick={() => addRecentSearch(train)}
                   className="flex items-center justify-between p-4 hover:bg-slate-50 transition-colors group"
                 >
                   <div className="flex items-start space-x-4">
@@ -84,11 +99,13 @@ export default function SearchResults({ query }: SearchResultsProps) {
                         <span className="font-bold text-slate-900">{train.number}</span>
                         <span className="text-slate-600 font-medium">{train.name}</span>
                       </div>
-                      <div className="flex items-center space-x-2 text-sm text-slate-500 mt-1">
-                        <span>{train.from} ({train.fromCode})</span>
-                        <ArrowRight size={14} className="text-slate-300" />
-                        <span>{train.to} ({train.toCode})</span>
-                      </div>
+                      {(train.from || train.to) && (
+                        <div className="flex items-center space-x-2 text-sm text-slate-500 mt-1">
+                          {train.from && <span>{train.from} {train.fromCode && `(${train.fromCode})`}</span>}
+                          {train.from && train.to && <ArrowRight size={14} className="text-slate-300" />}
+                          {train.to && <span>{train.to} {train.toCode && `(${train.toCode})`}</span>}
+                        </div>
+                      )}
                     </div>
                   </div>
                   <ArrowRight size={20} className="text-slate-300 group-hover:text-blue-500 transition-colors hidden sm:block" />

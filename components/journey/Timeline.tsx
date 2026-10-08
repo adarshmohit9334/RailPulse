@@ -1,6 +1,7 @@
 import { Station } from "@/types/train";
 import { cn } from "@/utils/cn";
 import { MapPin } from "lucide-react";
+import { formatDelay } from "@/utils/time";
 
 export default function Timeline({ stations, currentStationCode }: { stations: Station[], currentStationCode?: string }) {
   return (
@@ -56,7 +57,7 @@ export default function Timeline({ stations, currentStationCode }: { stations: S
                   </div>
                   {station.delayMinutes > 0 && !station.passed && (
                     <div className="text-xs text-red-500 font-medium mt-1">
-                      {station.delayMinutes}m late
+                      {formatDelay(station.delayMinutes)} late
                     </div>
                   )}
                 </div>
